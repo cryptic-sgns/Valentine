@@ -1,100 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0"/>
+
   <title>For You</title>
 
   <link rel="stylesheet" href="style.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
 </head>
 
 <body>
 
+<div class="cursor-glow"></div>
+
 <div class="stars"></div>
 
-<section class="hero">
+<nav>
+
+  <div class="logo">
+    For You
+  </div>
+
+  <div class="nav-links">
+
+    <a href="#page1">Beginning</a>
+    <a href="#page2">Thoughts</a>
+    <a href="#page3">Moments</a>
+    <a href="#page4">Letter</a>
+
+  </div>
+
+</nav>
+
+<!-- PAGE 1 -->
+
+<section class="page hero"
+         id="page1">
 
   <div class="hero-content">
-    <h1>I Said Things I Shouldn't Have.</h1>
+
+    <h1>
+      I Said Things I Shouldn't Have.
+    </h1>
 
     <p>
-      But I wanted to express what I truly feel.
+      But I wanted to create something honest.
     </p>
 
-    <button id="beginBtn">Begin</button>
+    <button id="enterBtn">
+      Enter
+    </button>
+
   </div>
 
 </section>
 
-<section class="story hidden" id="story">
+<!-- PAGE 2 -->
 
-  <div class="card">
-    <h2>What Happened</h2>
+<section class="page hidden"
+         id="page2">
 
-    <p>
-      Sometimes emotions speak louder than maturity.
-      I reacted instead of understanding.
-    </p>
-  </div>
+  <h2 class="section-title">
+    Thoughts I Should Have Understood Earlier
+  </h2>
 
-  <div class="flip-container">
+  <div class="floating-cards">
 
-    <div class="flip-card">
+    <div class="floating-card">
+      <h3>Patience</h3>
+      <p>
+        I should have paused before reacting.
+      </p>
+    </div>
 
-      <div class="front">
-        <h3>What I Said</h3>
-        <p>Words spoken in frustration.</p>
-      </div>
+    <div class="floating-card">
+      <h3>Understanding</h3>
+      <p>
+        Not every emotion needs a harsh response.
+      </p>
+    </div>
 
-      <div class="back">
-        <h3>What I Should Have Said</h3>
-        <p>
-          I should have listened calmly and spoken respectfully.
-        </p>
-      </div>
+    <div class="floating-card">
+      <h3>Respect</h3>
+      <p>
+        Words matter more than we realize.
+      </p>
+    </div>
 
+    <div class="floating-card">
+      <h3>Growth</h3>
+      <p>
+        Mistakes should teach us maturity.
+      </p>
+    </div>
+
+    <div class="floating-card">
+      <h3>Accountability</h3>
+      <p>
+        I acknowledge my actions completely.
+      </p>
     </div>
 
   </div>
+
+</section>
+
+<!-- PAGE 3 -->
+
+<section class="page hidden"
+         id="page3">
+
+  <h2 class="section-title">
+    Moments
+  </h2>
 
   <div class="gallery">
 
-    <h2>Moments</h2>
-
-    <div class="photos">
-      <img src="images/photo1.jpg">
-      <img src="images/photo2.jpg">
-      <img src="images/photo3.jpg">
-    </div>
-
-  </div>
-
-  <div class="letter">
-
-    <h2>A Letter</h2>
-
-    <p id="typed"></p>
-
-  </div>
-
-  <div class="final">
-
-    <button id="planeBtn">Send My Words</button>
-
-    <div class="plane hidden" id="plane">
-      ✈
-    </div>
-
-    <p class="thankyou hidden" id="thankyou">
-      Thank you for reading this.
-    </p>
+    <img src="images/photo1.jpg">
+    <img src="images/photo2.jpg">
+    <img src="images/photo3.jpg">
+    <img src="images/photo4.jpg">
+    <img src="images/photo5.jpg">
+    <img src="images/photo6.jpg">
+    <img src="images/photo7.jpg">
+    <img src="images/photo8.jpg">
+    <img src="images/photo9.jpg">
+    <img src="images/photo10.jpg">
 
   </div>
 
 </section>
+
+<!-- PAGE 4 -->
+
+<section class="page hidden"
+         id="page4">
+
+  <div class="letter-box">
+
+    <h2>
+      A Letter
+    </h2>
+
+    <p id="typedText"></p>
+
+    <button id="planeButton">
+      Send My Words
+    </button>
+
+    <div class="paper-plane hidden"
+         id="plane">
+      ✈
+    </div>
+
+  </div>
+
+</section>
+
+<div class="music-button"
+     id="musicBtn">
+  ♪
+</div>
+
+<audio id="bgMusic"
+       loop>
+
+  <source src="music.mp3"
+          type="audio/mp3">
+
+</audio>
 
 <script src="script.js"></script>
 
