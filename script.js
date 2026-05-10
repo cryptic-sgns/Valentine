@@ -1,61 +1,145 @@
-const beginBtn = document.getElementById('beginBtn');
-const story = document.getElementById('story');
+const enterBtn =
+document.getElementById('enterBtn');
 
-beginBtn.addEventListener('click', () => {
+const pages =
+document.querySelectorAll('.page');
 
-  story.classList.remove('hidden');
+enterBtn.addEventListener('click', () => {
 
-  story.scrollIntoView({
-    behavior: 'smooth'
+  pages.forEach(page => {
+    page.classList.remove('hidden');
   });
 
-  typeText();
+  document.getElementById('page2')
+  .scrollIntoView({
+    behavior:'smooth'
+  });
+
+  typeLetter();
 
 });
 
+/* CURSOR GLOW */
+
+const glow =
+document.querySelector('.cursor-glow');
+
+document.addEventListener('mousemove',
+(e)=>{
+
+  glow.style.left =
+  e.clientX + 'px';
+
+  glow.style.top =
+  e.clientY + 'px';
+
+});
+
+/* FLOATING CARDS */
+
+const cards =
+document.querySelectorAll('.floating-card');
+
+cards.forEach(card=>{
+
+  card.addEventListener('click',()=>{
+
+    card.classList.add('fade');
+
+  });
+
+});
+
+/* LETTER */
+
 const text = `
-I don't expect instant forgiveness.
+I know a website cannot undo words.
 
-I only wanted to acknowledge that my words were unfair.
+But I still wanted to create something sincere.
 
-You deserved patience and understanding from me.
+I reacted emotionally when I should have responded with understanding.
 
-Whatever happens ahead,
-I truly hope life treats you gently and beautifully.
+You deserved calmness,
+respect,
+and patience from me.
+
+I don't expect immediate forgiveness.
+
+I simply wanted to acknowledge my mistake honestly.
+
+And regardless of everything,
+I genuinely hope life brings you happiness,
+peace,
+and beautiful moments ahead.
 `;
 
-const typed = document.getElementById('typed');
+const typedText =
+document.getElementById('typedText');
 
-function typeText(){
+function typeLetter(){
 
   let i = 0;
 
-  const interval = setInterval(() => {
+  const interval =
+  setInterval(()=>{
 
-    typed.innerHTML += text.charAt(i);
+    typedText.innerHTML +=
+    text.charAt(i);
 
     i++;
 
     if(i >= text.length){
+
       clearInterval(interval);
+
     }
 
-  }, 40);
+  },35);
 
 }
 
-const planeBtn = document.getElementById('planeBtn');
+/* PAPER PLANE */
 
-const plane = document.getElementById('plane');
+const planeButton =
+document.getElementById('planeButton');
 
-const thankyou = document.getElementById('thankyou');
+const plane =
+document.getElementById('plane');
 
-planeBtn.addEventListener('click', () => {
+planeButton.addEventListener('click',()=>{
 
   plane.classList.remove('hidden');
 
-  setTimeout(() => {
-    thankyou.classList.remove('hidden');
-  }, 2000);
+});
+
+/* MUSIC */
+
+const musicBtn =
+document.getElementById('musicBtn');
+
+const bgMusic =
+document.getElementById('bgMusic');
+
+let playing = false;
+
+musicBtn.addEventListener('click',()=>{
+
+  if(!playing){
+
+    bgMusic.play();
+
+    playing = true;
+
+    musicBtn.innerHTML = '❚❚';
+
+  }else{
+
+    bgMusic.pause();
+
+    playing = false;
+
+    musicBtn.innerHTML = '♪';
+
+  }
 
 });
