@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<section class="hero">
+
+  <div class="hero-content">
+    <h1>I Said Things I Shouldn't Have.</h1>
+
+    <p>
+      But I wanted to express what I truly feel.
+    </p>
+
+    <button id="beginBtn">Begin</button>
+  </div>
+
+</section>
+
+<section class="story hidden" id="story">
+
+  <div class="card">
+    <h2>What Happened</h2>
+
+    <p>
+      Sometimes emotions speak louder than maturity.
+      I reacted instead of understanding.
+    </p>
+  </div>
+
+  <div class="flip-container">
+
+    <div class="flip-card">
+
+      <div class="front">
+        <h3>What I Said</h3>
+        <p>Words spoken in frustration.</p>
+      </div>
+
+      <div class="back">
+        <h3>What I Should Have Said</h3>
+        <p>
+          I should have listened calmly and spoken respectfully.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="gallery">
+
+    <h2>Moments</h2>
+
+    <div class="photos">
+      <img src="images/photo1.jpg">
+      <img src="images/photo2.jpg">
+      <img src="images/photo3.jpg">
+    </div>
+
+  </div>
+
+  <div class="letter">
+
+    <h2>A Letter</h2>
+
+    <p id="typed"></p>
+
+  </div>
+
+  <div class="final">
+
+    <button id="planeBtn">Send My Words</button>
+
+    <div class="plane hidden" id="plane">
+      ✈
+    </div>
+
+    <p class="thankyou hidden" id="thankyou">
+      Thank you for reading this.
+    </p>
+
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
