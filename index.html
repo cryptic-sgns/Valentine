@@ -1,582 +1,69 @@
-# Full Interactive Apology Website
-
-Save these 3 files in the same folder.
-
----
-
-# 1. index.html
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You ❤️</title>
+  <title>For Her ❤️</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="cursor-glow"></div>
+<div class="loader">
+  <h1>Collecting Memories...</h1>
+</div>
+
+<div class="cursor"></div>
+<div class="cursor2"></div>
+
+<div class="bg-blur blur1"></div>
+<div class="bg-blur blur2"></div>
+<div class="bg-blur blur3"></div>
 
 <section class="hero">
-  <div class="overlay"></div>
+
+  <div class="floating-hearts"></div>
 
   <div class="hero-content">
-    <h1 class="typing">I know I hurt you...</h1>
-    <p>
-      But this website is my small effort to show
-      that you truly mattered to me.
-    </p>
 
-    <a href="#memories" class="btn">Please Hear Me Once</a>
-  </div>
-</section>
+    <span class="tag">FOR SOMEONE SPECIAL</span>
 
-<section id="memories" class="memory-section">
-  <h2>Moments I Never Wanted To Lose</h2>
-
-  <div class="gallery">
-
-    <div class="card float">
-      <img src="images/1.jpg" alt="">
-      <p>This smile stayed with me.</p>
-    </div>
-
-    <div class="card float delay1">
-      <img src="images/2.jpg" alt="">
-      <p>You deserved softness, not nonsense.</p>
-    </div>
-
-    <div class="card float delay2">
-      <img src="images/3.jpg" alt="">
-      <p>I should've valued moments like this more.</p>
-    </div>
-
-    <div class="card float delay3">
-      <img src="images/4.jpg" alt="">
-      <p>Some people become memories too quickly.</p>
-    </div>
-
-  </div>
-</section>
-
-<section class="letters">
-  <h2>Things I Wanted To Say</h2>
-
-  <div class="letter-container">
-
-    <div class="letter" onclick="openLetter(this)">
-      💌 Open Letter
-      <div class="message">
-        I know sorry cannot erase things,
-        but I never wanted to become the reason
-        for your sadness.
-      </div>
-    </div>
-
-    <div class="letter" onclick="openLetter(this)">
-      💌 Open Letter
-      <div class="message">
-        I miss the comfort of talking to you.
-        Even silence felt peaceful.
-      </div>
-    </div>
-
-    <div class="letter" onclick="openLetter(this)">
-      💌 Open Letter
-      <div class="message">
-        If I could undo my words,
-        I genuinely would.
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="timeline">
-  <h2>What I Learned</h2>
-
-  <div class="timeline-item left">
-    <div class="content">
-      <h3>When We Met</h3>
-      <p>Everything felt lighter somehow.</p>
-    </div>
-  </div>
-
-  <div class="timeline-item right">
-    <div class="content">
-      <h3>Where I Messed Up</h3>
-      <p>I let emotions and stupidity speak louder than care.</p>
-    </div>
-  </div>
-
-  <div class="timeline-item left">
-    <div class="content">
-      <h3>What I Learned</h3>
-      <p>Some people deserve gentleness all the time.</p>
-    </div>
-  </div>
-</section>
-
-<section class="forgive-section">
-  <h2>Can We Talk Again?</h2>
-
-  <div class="buttons">
-    <button class="forgive-btn">Forgive Me ❤️</button>
-    <button class="runaway-btn" id="runaway">Still Angry?</button>
-  </div>
-</section>
-
-<section class="ending">
-  <canvas id="stars"></canvas>
-
-  <div class="ending-content">
-    <h2>
-      Even if things never become the same...
-    </h2>
+    <h1>
+      I Know
+      <span>I Hurt You</span>
+    </h1>
 
     <p>
-      I just wanted you to know that
-      you truly mattered to me.
+      This is not just a website.
+      It is me trying to express
+      what I could not say properly.
     </p>
 
-    <button class="final-btn" onclick="confettiEffect()">
-      One Last Smile?
+    <button class="magnetic-btn" onclick="scrollToMemories()">
+      Hear Me Out
     </button>
+
   </div>
+
 </section>
 
-<script src="script.js"></script>
-</body>
+<section class="memories" id="memories">
+
+  <h2>Moments That Stayed With Me</h2>
+
+  <div class="cards">
+
+    <div class="memory-card">
+      <img src="images/1.jpg">
+      <div class="card-content">
+        <h3>Your Smile</h3>
+        <p>This smile stayed in my head longer than you know.</p>
+      </div>
+    </div>
+
 </html>
-```
-
----
-
-# 2. style.css
-
-```css
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #0f172a;
-  color: white;
-  overflow-x: hidden;
-}
-
-.cursor-glow {
-  width: 250px;
-  height: 250px;
-  background: rgba(255, 192, 203, 0.15);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  filter: blur(60px);
-  transform: translate(-50%, -50%);
-  z-index: 999;
-}
-
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: linear-gradient(to bottom, #020617, #111827);
-  position: relative;
-}
-
-.hero-content {
-  z-index: 2;
-  max-width: 700px;
-  padding: 20px;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 4rem;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  opacity: 0.8;
-  line-height: 1.7;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 14px 32px;
-  border-radius: 40px;
-  background: white;
-  color: black;
-  text-decoration: none;
-  transition: 0.4s;
-}
-
-.btn:hover {
-  transform: scale(1.08);
-}
-
-.memory-section {
-  padding: 120px 8%;
-}
-
-.memory-section h2,
-.letters h2,
-.timeline h2,
-.forgive-section h2 {
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 60px;
-  font-family: 'Playfair Display', serif;
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-}
-
-.card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 24px;
-  overflow: hidden;
-  transition: 0.5s;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
-}
-
-.card img {
-  width: 100%;
-  height: 340px;
-  object-fit: cover;
-}
-
-.card p {
-  padding: 20px;
-  text-align: center;
-}
-
-.float {
-  animation: float 5s ease-in-out infinite;
-}
-
-.delay1 {
-  animation-delay: 1s;
-}
-
-.delay2 {
-  animation-delay: 2s;
-}
-
-.delay3 {
-  animation-delay: 3s;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-14px); }
-  100% { transform: translateY(0px); }
-}
-
-.letters {
-  padding: 120px 8%;
-}
-
-.letter-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-}
-
-.letter {
-  width: 280px;
-  min-height: 180px;
-  background: #1e293b;
-  border-radius: 20px;
-  padding: 30px;
-  cursor: pointer;
-  transition: 0.4s;
-  position: relative;
-  overflow: hidden;
-}
-
-.letter:hover {
-  transform: translateY(-8px);
-}
-
-.message {
-  margin-top: 20px;
-  opacity: 0;
-  transition: 0.5s;
-  font-family: 'Caveat', cursive;
-  font-size: 1.5rem;
-  line-height: 1.6;
-}
-
-.letter.open .message {
-  opacity: 1;
-}
-
-.timeline {
-  padding: 120px 8%;
-  position: relative;
-}
-
-.timeline::after {
-  content: '';
-  position: absolute;
-  width: 4px;
-  background: rgba(255,255,255,0.2);
-  top: 180px;
-  bottom: 0;
-  left: 50%;
-}
-
-.timeline-item {
-  padding: 20px 40px;
-  position: relative;
-  width: 50%;
-}
-
-.timeline-item .content {
-  background: rgba(255,255,255,0.05);
-  padding: 30px;
-  border-radius: 20px;
-}
-
-.left {
-  left: 0;
-}
-
-.right {
-  left: 50%;
-}
-
-.forgive-section {
-  padding: 120px 8%;
-  text-align: center;
-}
-
-.buttons {
-  position: relative;
-  height: 300px;
-}
-
-.buttons button {
-  padding: 18px 34px;
-  border: none;
-  border-radius: 40px;
-  font-size: 1rem;
-  cursor: pointer;
-  position: absolute;
-  transition: 0.3s;
-}
-
-.forgive-btn {
-  left: 40%;
-  background: white;
-}
-
-.runaway-btn {
-  left: 55%;
-  background: pink;
-}
-
-.ending {
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-#stars {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.ending-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 700px;
-}
-
-.ending h2 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.final-btn {
-  margin-top: 40px;
-  padding: 16px 34px;
-  border-radius: 40px;
-  border: none;
-  cursor: pointer;
-}
-
-@media(max-width:768px) {
-
-  .hero h1 {
-    font-size: 2.7rem;
-  }
-
-  .timeline::after {
-    left: 20px;
-  }
-
-  .timeline-item {
-    width: 100%;
-    padding-left: 60px;
-  }
-
-  .right {
-    left: 0;
-  }
-
-  .buttons button {
-    position: static;
-    margin: 10px;
-  }
-}
-```
-
----
-
-# 3. script.js
-
-```javascript
-const glow = document.querySelector('.cursor-glow');
-
-window.addEventListener('mousemove', (e) => {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top = e.clientY + 'px';
-});
-
-function openLetter(letter) {
-  letter.classList.toggle('open');
-}
-
-const runaway = document.getElementById('runaway');
-
-runaway.addEventListener('mouseover', () => {
-
-  const x = Math.random() * 80;
-  const y = Math.random() * 200;
-
-  runaway.style.left = `${x}%`;
-  runaway.style.top = `${y}px`;
-});
-
-function confettiEffect() {
-  alert('Thank you for reading till the end ❤️');
-}
-
-const canvas = document.getElementById('stars');
-const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let stars = [];
-
-for(let i=0; i<120; i++) {
-  stars.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 2
-  });
-}
-
-function drawStars() {
-
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  ctx.fillStyle = 'white';
-
-  stars.forEach(star => {
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-    ctx.fill();
-  });
-
-  requestAnimationFrame(drawStars);
-}
-
-drawStars();
-```
-
----
-
-# HOW TO ADD HER PHOTOS
-
-Create a folder:
-
-```txt
-images
-```
-
-Then add:
-
-```txt
-1.jpg
-2.jpg
-3.jpg
-4.jpg
-```
-
-You can add more cards manually.
-
----
-
-# EXTRA THINGS YOU CAN ADD
-
-## Background Music
-
-Inside HTML:
-
-```html
-<audio autoplay loop>
-  <source src="music/song.mp3" type="audio/mp3">
-</audio>
-```
-
----
-
-# BEST DEPLOYMENT
-
-Use:
-
-* Netlify
-* Vercel
-* GitHub Pages
-
----
-
-# FINAL TIP
-
-Keep captions personal.
-The emotional writing matters more than flashy animations.
