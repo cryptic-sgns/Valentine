@@ -170,6 +170,106 @@ section{position:relative;z-index:1;display:flex;flex-direction:column;align-ite
 .lba.ln{right:.3rem}.lba.ln:hover{transform:translateY(-50%) translateX(4px)}
 .lbc{position:absolute;bottom:1.3rem;left:50%;transform:translateX(-50%);font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,.35);font-size:.85rem;white-space:nowrap}
 
+/* ══ MUSIC PLAYER ══ */
+#music-player{
+  position:fixed;
+  bottom:1.6rem;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9995;
+  display:flex;
+  align-items:center;
+  gap:.9rem;
+  background:rgba(20,10,16,.82);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(212,128,143,.18);
+  border-radius:100px;
+  padding:.55rem 1.1rem .55rem .6rem;
+  box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04);
+  transition:opacity .4s,transform .4s;
+  cursor:default;
+}
+#music-player.hidden-player{
+  opacity:0;
+  transform:translateX(-50%) translateY(20px);
+  pointer-events:none;
+}
+/* pulsing vinyl dot */
+.mp-vinyl{
+  width:32px;height:32px;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--rose),var(--mauve),var(--gold),var(--rose));
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  animation:spin 4s linear infinite;
+  box-shadow:0 0 12px rgba(212,128,143,.35);
+}
+.mp-vinyl.paused{animation-play-state:paused}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mp-vinyl::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--ink);display:block}
+
+/* bars */
+.mp-bars{display:flex;align-items:flex-end;gap:2px;height:18px;flex-shrink:0}
+.mp-bars span{
+  display:block;width:3px;border-radius:2px;
+  background:var(--mrose);
+  animation:bar-bounce 1s ease-in-out infinite alternate;
+}
+.mp-bars span:nth-child(1){height:6px;animation-delay:0s}
+.mp-bars span:nth-child(2){height:14px;animation-delay:.15s}
+.mp-bars span:nth-child(3){height:10px;animation-delay:.3s}
+.mp-bars span:nth-child(4){height:16px;animation-delay:.1s}
+.mp-bars span:nth-child(5){height:8px;animation-delay:.25s}
+@keyframes bar-bounce{from{transform:scaleY(.3);opacity:.5}to{transform:scaleY(1);opacity:1}}
+.mp-bars.paused span{animation-play-state:paused;transform:scaleY(.3);opacity:.4}
+
+.mp-info{display:flex;flex-direction:column;gap:.12rem;min-width:0}
+.mp-title{font-family:'Playfair Display',serif;font-style:italic;font-size:.72rem;color:var(--blush);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.mp-sub{font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.15em;color:rgba(250,246,240,.28);text-transform:uppercase}
+
+.mp-btn{
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(212,128,143,.3);
+  background:transparent;
+  color:var(--mrose);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;
+  font-size:.75rem;
+  transition:background .25s,border-color .25s,transform .15s;
+}
+.mp-btn:hover{background:rgba(212,128,143,.15);border-color:var(--mrose);transform:scale(1.08)}
+.mp-btn:active{transform:scale(.94)}
+
+/* hidden YT iframe */
+#yt-frame{position:fixed;width:1px;height:1px;top:-9999px;left:-9999px;opacity:0;pointer-events:none}
+
+/* start overlay — prompts user gesture so autoplay works */
+#mp-overlay{
+  position:fixed;inset:0;z-index:9994;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(10,5,10,.6);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  cursor:pointer;
+  transition:opacity .6s;
+}
+#mp-overlay.gone{opacity:0;pointer-events:none}
+.mp-ov-inner{
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  animation:fu .7s ease forwards;
+}
+.mp-ov-icon{
+  width:64px;height:64px;border-radius:50%;
+  border:1.5px solid rgba(212,128,143,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;color:var(--mrose);
+  background:rgba(212,128,143,.08);
+  transition:background .3s,transform .2s;
+}
+#mp-overlay:hover .mp-ov-icon{background:rgba(212,128,143,.18);transform:scale(1.08)}
+.mp-ov-text{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:rgba(250,246,240,.65);text-align:center}
+.mp-ov-hint{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,246,240,.25)}
+
 /* RESPONSIVE */
 @media(max-width:620px){
 .tlline{left:18px}
@@ -179,6 +279,8 @@ section{position:relative;z-index:1;display:flex;flex-direction:column;align-ite
 .te:nth-child(even) .tpc{order:-1}
 .cg{grid-template-columns:1fr 1fr}
 .fc{height:175px}
+#music-player{bottom:1rem;padding:.5rem .9rem .5rem .5rem;gap:.7rem}
+.mp-title{max-width:110px}
 }
 </style>
 </head>
@@ -187,6 +289,35 @@ section{position:relative;z-index:1;display:flex;flex-direction:column;align-ite
 <div id="cur"></div>
 <div id="cur2"></div>
 <div id="particles"></div>
+
+<!-- MUSIC START OVERLAY -->
+<div id="mp-overlay">
+  <div class="mp-ov-inner">
+    <div class="mp-ov-icon">♪</div>
+    <p class="mp-ov-text">tap anywhere to begin</p>
+    <p class="mp-ov-hint">music will play softly in the background</p>
+  </div>
+</div>
+
+<!-- HIDDEN YOUTUBE IFRAME -->
+<iframe id="yt-frame"
+  src="https://www.youtube.com/embed/8sgsM_aZcIg?enablejsapi=1&autoplay=0&loop=1&playlist=8sgsM_aZcIg&controls=0&rel=0&modestbranding=1"
+  allow="autoplay; encrypted-media"
+  allowfullscreen>
+</iframe>
+
+<!-- MUSIC PLAYER UI -->
+<div id="music-player" class="hidden-player">
+  <div class="mp-vinyl" id="mp-vinyl"><!-- center dot via ::after --></div>
+  <div class="mp-bars" id="mp-bars">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="mp-info">
+    <span class="mp-title">Tere Bina</span>
+    <span class="mp-sub">now playing</span>
+  </div>
+  <button class="mp-btn" id="mp-toggle" title="Play / Pause">⏸</button>
+</div>
 
 <div id="loader">
   <p class="lt">Opening something made with care…</p>
@@ -317,7 +448,6 @@ const waveMsgs=[
   {text:'I can\'t offer you a flawless version of me. But I can promise you a version that tries — that listens better, reacts slower, and cares louder. You\'ve always deserved that. You still do.'},
 ];
 
-/* FIX 3: Fixed the broken string in photos array (entry index 15 had unmatched quote + stray HTML outside string) */
 const photos=[
   {src:'images/WhatsApp Image 2026-05-10 at 3.32.02 PM (1).jpeg',t:'That one morning',c:'<em>Cuteeeee</em> — the kind of joy that it gave me was impeccable.'},
   {src:'images/WhatsApp Image 2026-05-10 at 3.32.02 PM.jpeg',t:'The Start......',c:'I remember thinking: <em>Should I take the risk.</em>'},
@@ -334,10 +464,57 @@ const photos=[
   {src:'images/WhatsApp Image 2026-05-10 at 3.32.08 PM.jpeg',t:'Fearless eyes',c:'The eyebrows choreography was amazing <em>Want to see them in real.</em>'},
   {src:'images/WhatsApp Image 2026-05-10 at 3.32.08 PM (1).jpeg',t:'Copy Cat',c:'Me copying up your dp which said a lot...... <em></em>'},
   {src:'images/WhatsApp Image 2026-05-10 at 3.32.09 PM (2).jpeg',t:'Not just a sketch',c:'............<em></em>'},
-  /* FIX: was: c:'Please don\'t leave' <em> </em>'} — stray HTML outside the string, unmatched quote */
   {src:'images/WhatsApp Image 2026-05-10 at 3.32.09 PM.jpeg',t:'Waitttttt',c:'Please don\'t leave <em></em>'},
   {src:'images/WhatsApp Image 2026-05-10 at 3.32.12 PM.jpeg',t:'11:11',c:'Someday.........<em></em>'}
 ];
+
+/* ══ MUSIC PLAYER ══ */
+let ytPlayer=null,isPlaying=false,playerReady=false;
+
+// Load YT IFrame API
+window.onYouTubeIframeAPIReady=function(){
+  ytPlayer=new YT.Player('yt-frame',{
+    videoId:'8sgsM_aZcIg',
+    playerVars:{autoplay:0,loop:1,playlist:'8sgsM_aZcIg',controls:0,rel:0,modestbranding:1},
+    events:{
+      onReady:()=>{playerReady=true;},
+      onStateChange:(e)=>{
+        if(e.data===YT.PlayerState.PLAYING){setPlaying(true);}
+        else if(e.data===YT.PlayerState.PAUSED||e.data===YT.PlayerState.ENDED){setPlaying(false);}
+      }
+    }
+  });
+};
+
+const ytScript=document.createElement('script');
+ytScript.src='https://www.youtube.com/iframe_api';
+document.head.appendChild(ytScript);
+
+function setPlaying(state){
+  isPlaying=state;
+  const vinyl=document.getElementById('mp-vinyl');
+  const bars=document.getElementById('mp-bars');
+  const btn=document.getElementById('mp-toggle');
+  if(state){vinyl.classList.remove('paused');bars.classList.remove('paused');btn.textContent='⏸';}
+  else{vinyl.classList.add('paused');bars.classList.add('paused');btn.textContent='▶';}
+}
+
+function startMusic(){
+  if(playerReady&&ytPlayer){
+    ytPlayer.playVideo();
+    document.getElementById('music-player').classList.remove('hidden-player');
+  }
+  const ov=document.getElementById('mp-overlay');
+  ov.classList.add('gone');
+  setTimeout(()=>ov.style.display='none',700);
+}
+
+document.getElementById('mp-overlay').addEventListener('click',startMusic);
+
+document.getElementById('mp-toggle').addEventListener('click',()=>{
+  if(!playerReady||!ytPlayer)return;
+  if(isPlaying){ytPlayer.pauseVideo();}else{ytPlayer.playVideo();}
+});
 
 /* ══ BOOT ══ */
 window.addEventListener('load',()=>{
@@ -345,7 +522,6 @@ window.addEventListener('load',()=>{
   initParticles();
   initCursor();
   buildWordReveal();
-  /* FIX: defer canvas builds to next frame so offsetWidth is available */
   requestAnimationFrame(()=>{
     buildMirror();
     buildWave();
@@ -390,7 +566,6 @@ function triggerWords(){
 /* ── MIRROR ── */
 function buildMirror(){
   const canvas=document.getElementById('mc');
-  /* FIX: use parentElement width as fallback if offsetWidth is 0 */
   const W=canvas.offsetWidth||canvas.parentElement.offsetWidth||360;
   const H=Math.round(W*4/3);
   canvas.width=W;canvas.height=H;
@@ -478,7 +653,6 @@ function buildCards(){
 function buildWave(){
   const canvas=document.getElementById('wc');
   const dpr=window.devicePixelRatio||1;
-  /* FIX: use parentElement width as fallback if offsetWidth is 0 */
   const cssW=canvas.offsetWidth||canvas.parentElement.offsetWidth||700;
   canvas.width=cssW*dpr;
   canvas.height=220;
@@ -545,7 +719,6 @@ function buildTimeline(){
 /* ── PROMISE CANVAS ── */
 function buildCanvas(){
   const canvas=document.getElementById('pc');
-  /* FIX: use parentElement width as fallback if offsetWidth is 0 */
   canvas.width=canvas.offsetWidth||canvas.parentElement.offsetWidth||680;
   canvas.height=260;
   const ctx=canvas.getContext('2d');
