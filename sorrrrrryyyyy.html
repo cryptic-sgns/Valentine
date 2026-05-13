@@ -240,8 +240,7 @@ section{position:relative;z-index:1;display:flex;flex-direction:column;align-ite
 .mp-btn:hover{background:rgba(212,128,143,.15);border-color:var(--mrose);transform:scale(1.08)}
 .mp-btn:active{transform:scale(.94)}
 
-/* hidden YT iframe */
-#yt-frame{position:fixed;width:1px;height:1px;top:-9999px;left:-9999px;opacity:0;pointer-events:none}
+
 
 /* start overlay — prompts user gesture so autoplay works */
 #mp-overlay{
@@ -299,12 +298,10 @@ section{position:relative;z-index:1;display:flex;flex-direction:column;align-ite
   </div>
 </div>
 
-<!-- HIDDEN YOUTUBE IFRAME -->
-<iframe id="yt-frame"
-  src="https://www.youtube.com/embed/8sgsM_aZcIg?enablejsapi=1&autoplay=0&loop=1&playlist=8sgsM_aZcIg&controls=0&rel=0&modestbranding=1"
-  allow="autoplay; encrypted-media"
-  allowfullscreen>
-</iframe>
+<!-- HIDDEN AUDIO ELEMENT -->
+<audio id="bg-audio" loop preload="auto">
+  <source src="song.mp3" type="audio/mpeg"/>
+</audio>
 
 <!-- MUSIC PLAYER UI -->
 <div id="music-player" class="hidden-player">
@@ -469,51 +466,31 @@ const photos=[
 ];
 
 /* ══ MUSIC PLAYER ══ */
-let ytPlayer=null,isPlaying=false,playerReady=false;
-
-// Load YT IFrame API
-window.onYouTubeIframeAPIReady=function(){
-  ytPlayer=new YT.Player('yt-frame',{
-    videoId:'8sgsM_aZcIg',
-    playerVars:{autoplay:0,loop:1,playlist:'8sgsM_aZcIg',controls:0,rel:0,modestbranding:1},
-    events:{
-      onReady:()=>{playerReady=true;},
-      onStateChange:(e)=>{
-        if(e.data===YT.PlayerState.PLAYING){setPlaying(true);}
-        else if(e.data===YT.PlayerState.PAUSED||e.data===YT.PlayerState.ENDED){setPlaying(false);}
-      }
-    }
-  });
-};
-
-const ytScript=document.createElement('script');
-ytScript.src='https://www.youtube.com/iframe_api';
-document.head.appendChild(ytScript);
+const audio = document.getElementById('bg-audio');
+let isPlaying = false;
 
 function setPlaying(state){
-  isPlaying=state;
-  const vinyl=document.getElementById('mp-vinyl');
-  const bars=document.getElementById('mp-bars');
-  const btn=document.getElementById('mp-toggle');
-  if(state){vinyl.classList.remove('paused');bars.classList.remove('paused');btn.textContent='⏸';}
-  else{vinyl.classList.add('paused');bars.classList.add('paused');btn.textContent='▶';}
+  isPlaying = state;
+  const vinyl = document.getElementById('mp-vinyl');
+  const bars  = document.getElementById('mp-bars');
+  const btn   = document.getElementById('mp-toggle');
+  if(state){ vinyl.classList.remove('paused'); bars.classList.remove('paused'); btn.textContent='⏸'; }
+  else      { vinyl.classList.add('paused');    bars.classList.add('paused');    btn.textContent='▶'; }
 }
 
 function startMusic(){
-  if(playerReady&&ytPlayer){
-    ytPlayer.playVideo();
-    document.getElementById('music-player').classList.remove('hidden-player');
-  }
-  const ov=document.getElementById('mp-overlay');
+  audio.play().then(()=>{ setPlaying(true); }).catch(()=>{});
+  document.getElementById('music-player').classList.remove('hidden-player');
+  const ov = document.getElementById('mp-overlay');
   ov.classList.add('gone');
-  setTimeout(()=>ov.style.display='none',700);
+  setTimeout(()=>ov.style.display='none', 700);
 }
 
-document.getElementById('mp-overlay').addEventListener('click',startMusic);
+document.getElementById('mp-overlay').addEventListener('click', startMusic);
 
-document.getElementById('mp-toggle').addEventListener('click',()=>{
-  if(!playerReady||!ytPlayer)return;
-  if(isPlaying){ytPlayer.pauseVideo();}else{ytPlayer.playVideo();}
+document.getElementById('mp-toggle').addEventListener('click', ()=>{
+  if(isPlaying){ audio.pause(); setPlaying(false); }
+  else         { audio.play(); setPlaying(true); }
 });
 
 /* ══ BOOT ══ */
